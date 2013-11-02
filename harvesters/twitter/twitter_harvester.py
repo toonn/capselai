@@ -7,6 +7,7 @@ tw = twitter.Api(
         access_token_key='Ya6pzMxB90mNS2O1QpHRbqEnqyDMukQqQMnFGCMG',
         access_token_secret='I4xkiyyGINNqAzc06CBWTqKQCWsH2xYbirSwGo7Qz4')
 
+print 'Planting seeds...'
 seeds = [
     '#news',
     '#fail',
@@ -38,6 +39,7 @@ seeds = [
     '#ethiopia'
     ]
 
+print 'Growing the crops...'
 tweets_per_seed = 100
 # This for loop could easily be replaced by a dictionary comprehension.
 #
@@ -54,6 +56,7 @@ for seed in seeds:
     crops = [plant.GetText() for plant in plants]
     harvest[seed] = crops
 
+print 'Bringing in the harvest...'
 for name, crop in harvest.iteritems():
     file = codecs.open(name + '.tweets', 'w', 'utf-8')
     file.write('\n'.join(crop))
