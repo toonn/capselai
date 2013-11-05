@@ -2,7 +2,7 @@ import zlib # =gzip, 1to9
 import bz2 # 1to9
 
 # The following algorithms were designed for speed not compression ratio
-import snappy
+#import snappy
 import lz4 # compress and compressHC
 
 class cluster:
