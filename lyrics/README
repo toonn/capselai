@@ -1,0 +1,11 @@
+In de folders die met lyrics beginnen zitten lyrics van die artiesten.
+In de folder testAggregate zitten files die random gekozen zijn uit de collecties van Children of Bodom, Coldplay en Manau (maximaal 20 per artiest, maar van Manau zijn er maar 11 dus zijn het er in totaal 51).
+getlyrics.sh neemt een bandnaam als argument (de afzonderlijke woorden van de bandnaam met spaties tussen) en fetcht al de lyrics die lyrics.com van die band heeft. Uit de HTML worden de lyrics geëxtraheerd met extractlyrics.pl (een perl script). Al de lege lyrics worden verwijderd en ook per correcte file het deel aan het einde met de origine van de lyrics en de schrijver en zo.
+testSingle.sh en testCorr.sh doen de compressie. De output van de compressiegroottes wordt in test[Single|Corr]<Compressiealgoritme>.pl gegeven (Prologfiles). OPMERKING: ik heb deze nog manueel aangepast (de files worden als map/naam.extensie er in gezet en ik heb elke keer map/ en .extensie verwijderd, ik heb ook 42- vervangen door fortytwo-, wat eigenlijk niet nodig was), ik zou eigenlijk de dingen die ik gedaan heb in perl scripts in de shellscripts moeten steken maar ik ben er niet toe gekomen.
+De test*.pl zonder compressiealgoritme die er nog tussen staan zijn eigenlijk niet meer geldig maar ze staan er nog tussen omdat het die van de coldplay clustering zijn waar ik de output ook nog van bij gehouden heb.
+Het Prologprogramma is clustering.pl. De gegevens bevinden zich dan in test[Single|Corr]<Compressiealgoritme>.pl.
+Als automatische test is er autotest.pl beschikbaar. Ik wou er een soort uitvoerbaar script van maken maar het is er niet helemaal van gekomen. Om het te draaien gewoon oproepen in swi-prolog en main querien. Het berekent volledige clusterings voor inputgroottes van 20 tot 50 in stappen van 10 en voor alle verschillende algoritmes. Alleen de eerste mogelijke clustering per set wordt teruggegeven.
+In testTimesForClusters staat de prompt output van het script (met de timings in).
+In scriptoutput staan de clusterings die gevonden zijn door het script met de bijbehorende quality ratings.
+In coldplayAllClusteringOutput staat een (volledige?) clustering van alle files voor coldplay (in totaal ongeveer 130).
+
