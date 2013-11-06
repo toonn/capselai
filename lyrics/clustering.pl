@@ -105,3 +105,13 @@ contains_amount(c(A,B),Name,Acc,Amount) :-
     contains_amount(A,Name,Acc,AAmount),
     contains_amount(B,Name,Acc,BAmount),
     Amount is AAmount+BAmount.
+
+quality_alt(Fcs,Names,Quality) :-
+    true.
+
+quality_alt_sub(_-Name,Name,1).
+quality_alt_sub(_-Other,Name,0).
+quality_alt_sub(c(A,B),Name,Q) :-
+    quality_alt_sub(A,Name,QA),
+    quality_alt_sub(B,Name,QB),
+    Q is (QA+QB)/2.

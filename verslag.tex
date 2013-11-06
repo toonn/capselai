@@ -126,7 +126,7 @@ Compressie biedt hier een heel algemene manier om aan clustering te doen omdat m
 vergelijking van de gecomprimeerde groottes van de verschillende gegevens afzonderlijk 
 en de gecomprimeerde groottes van combinaties van gegevens afstanden kan afleiden tussen
 de gegevens, wat dan een vorm van hi\"erarchisch (of ook wel agglomeratief) clusteren
-mogelijk maakt. Deze afstanden kunnen op verschillende manieren gedefini\"eerd worden,
+mogelijk maakt. Deze afstanden kunnen op verschillende manieren gedefinieerd worden,
 wat ook verschillende vormen van clusters tot gevolg heeft.
 
 %------------------------------------------------
@@ -145,55 +145,68 @@ compressieprogramma's om op een automatische manier afzonderlijke tekstbestanden
 combinaties van tekstbestanden te comprimeren. De groottes van deze bestanden werden dan
 bijgehouden in een tekstbestand dat dan later ingelezen kon worden door een zelf geschreven
 clusterprogramma.
-%%Onderstaande zin is een beetje vreemd.
+% Onderstaande zin is een beetje vreemd.
 Uit interesse voor de toepassing van het declaratief programmeerparadigma op dit probleem
 werd aanvankelijk gekozen voor een Prolog-programma voor de clustering.
 Dit leidt tot een vrij compact en flexibel programma, maar de complexiteit in functie van 
-het aantal items dat geclusterd moest worden bleek vrij slecht.
-\begin{compactitem}
+het aantal items dat geclusterd moest worden bleek vrij slecht (namelijk ongeveer $O(3^n)$).
+%TODO Figuur complexity.png moet hier komen (of een gelijkaardige figuur, het is eigenlijk
+% gewoon y=(0.144/(2.533^2))*2.533^(x/10) vanaf 20 of iets dergelijks, een grove 
+% vereenvoudiging en extrapolatie van de tijden die ik gemeten heb
+De complexiteit in functie van het aantal top-level clusters is lineair.
+%TODO Hier misschien een voorstelling van de dingen die in testTimesForClusters staan, 
+% daar heb ik metingen voor tijden van 3 verschillende aantallen clusters (130 - het aantal
+% dat er staat)
+Dit programma werd toegepast op sets van liedjesteksten (met een script automatisch 
+afgehaald van www.lyrics.com).
+Deze liedjesteksten werden gecomprimeerd met \emph{tar}+\emph{gzip},\emph{lrz} met sterkte 2,
+ \emph{lrz} met sterkte 9 (de hoogste sterkte) en \emph{zpaq}.
+Uit een test met teksten van 1 enkele artiest bleek dat het programma kan detecteren dat 2 
+verschillende files lyrics van hetzelfde nummer bevatten (een triviale toepassing).
+Als uitgebreide test werd het programma toegepast met een vorm van average linkage 
+(als afstand tussen clusters neemt het programma het gemiddelde van de afstanden tussen de subclusters van de 2 clusters onderling) 
+op de volgende testopstelling: maximaal 20 lyrics van 3 verschillende artiesten, 
+2 Engelstalige artiesten en 1 Franstalige artiest. 
+De afstanden tussen deze files werden berekend en uit de clustering bleek dat het programma
+in staat was te herkennen dat de teksten van de Franstalige artiest bij elkaar hoorden.
+% Zie scriptoutput file (ik heb deze wel niet echt nagekeken maar uit een manuele test bleek
+% het wel)
+Een ruwe kwaliteitsmetriek gaf aan dat de resultaten relatief goed waren. Deze ruwe 
+kwaliteitsmetriek is als volgt gedefinieerd: 
+\begin{itemize}
+\item De kwaliteit van de volledige clustering is het gemiddelde van de kwaliteiten per cluster.
+\item De kwaliteit van een cluster is de verhouding tussen het aantal keren dat de meest 
+voorkomende naam voorkomt en het aantal elementen in de cluster. 
+Dit is dus een getal tussen $1/#namen$ en $1$.
+\end{itemize}
+De kwaliteit van de clustering is dus ook een getal tussen 0 en 1.
+% De resultaten van de het automatisch test script dat ik geschreven heb (met de kwaliteitsfactoren er bij) staan in scriptoutput
+Uit het automatisch testen blijkt dat deze ruwe kwaliteitsmaat niet heel erg intu\"itieve
+resultaten oplevert. Als verbetering kan misschien een soort recursief gedefinieerde
+kwaliteitsmaat over de clusterstructuur opgesteld worden maar hier is in het kader van het
+Prolog-programma niet verder op in gegaan.
 
-\end{compactitem}
-
+%TODO Insert Python methode tekst
 
 %------------------------------------------------
 
-\section{Resultaten}
+\section{Samenvatting Resultaten}
 
-\begin{table}[H]
-\caption{Example table}
-\centering
-\begin{tabular}{llr}
-\toprule
-\multicolumn{2}{c}{Name} \\
-\cmidrule(r){1-2}
-First name & Last Name & Grade \\
-\midrule
-John & Doe & $7.5$ \\
-Richard & Miles & $2$ \\
-\bottomrule
-\end{tabular}
-\end{table}
+Uit toepassing van het Prolog-programma is het volgende gebleken:
+\begin{itemize}
+\item De complexiteit van het clusteren is exponentieel in de grootte van de input.
+\item De complexiteit van het clusteren is afnemend lineair in het aantal gewenste clusters.
+\item Clustering van teksten in verschillende talen levert een goede herkenning van de taal op.
+\item De sterkte van de compressie heeft niet aantoonbaar veel invloed op de kwaliteit van de
+clustering volgens de ruwe kwaliteitsmaat, maar deze is niet echt goed dus dit resultaat is
+van bedenkelijke significantie.
+\end{itemize}
 
-\lipsum[5] % Dummy text
-
-\begin{equation}
-\label{eq:emc}
-e = mc^2
-\end{equation}
-
-\lipsum[6] % Dummy text
+%TODO Insert Python resultaten tekst
 
 %------------------------------------------------
 
-\section{Discussion}
-
-\subsection{Subsection One}
-
-\lipsum[7] % Dummy text
-
-\subsection{Subsection Two}
-
-\lipsum[8] % Dummy text
+% Moet hier nog iets komen? Ik denk het niet.
 
 %----------------------------------------------------------------------------------------
 %	REFERENCE LIST
@@ -201,6 +214,7 @@ e = mc^2
 
 \begin{thebibliography}{99} % Bibliography - this is intentionally simple in this template
 
+% Nog altijd de dummy bibliografie, ter referentie van hoe ze in het origineel template deden.
 \bibitem[Figueredo and Wolf, 2009]{Figueredo:2009dg}
 Figueredo, A.~J. and Wolf, P. S.~A. (2009).
 \newblock Assortative pairing and life history strategy - a cross-cultural
