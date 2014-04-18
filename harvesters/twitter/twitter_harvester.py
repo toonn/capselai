@@ -2,10 +2,10 @@ import codecs
 import twitter
 
 tw = twitter.Api(
-        consumer_key='jxuT0U0d55qkDURTiRdeFg',
-        consumer_secret='MwmuJ7he4tLqixbscHA80QYpHUvHZggCZxDCHGT0unI',
-        access_token_key='155898209-Ya6pzMxB90mNS2O1QpHRbqEnqyDMukQqQMnFGCMG',
-        access_token_secret='I4xkiyyGINNqAzc06CBWTqKQCWsH2xYbirSwGo7Qz4')
+        consumer_key='',
+        consumer_secret='',
+        access_token_key='',
+        access_token_secret='')
 
 print 'Planting seeds...'
 seeds = [
